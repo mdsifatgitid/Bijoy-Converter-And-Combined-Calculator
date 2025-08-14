@@ -1,11 +1,11 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>কম্বাইন্ড ক্যালকুলেটর</title>
+    <title>Combined Calculator</title>
+	<link rel="icon" type="image/png" href="https://mdsifatgitid.github.io/converticon.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -20,7 +20,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Hind Siliguri', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -198,18 +198,21 @@
             color: #333;
             font-weight: 600;
         }
-        .age-calculator-content .input-group input[type="date"] {
+        .age-calculator-content .input-group input[type="date"],
+        .age-calculator-content .input-group input[type="number"] {
             width: 100%;
             padding: 12px; /* বর্ধিত প্যাডিং */
             border: 1px solid #cce7ff; /* হালকা নীল বর্ডার */
             border-radius: 10px;
             font-size: 1rem; /* বর্ধিত ফন্ট সাইজ */
             box-sizing: border-box; /* প্রস্থে প্যাডিং অন্তর্ভুক্ত করুন */
-            appearance: none; /* ডিফল্ট তারিখ ইনপুট স্টাইলিং সরান */
-            -webkit-appearance: none;
             cursor: pointer;
             background-color: #eaf6ff; /* হালকা নীল ইনপুট ব্যাকগ্রাউন্ড */
             color: #333;
+        }
+        .age-calculator-content .input-group input[type="date"] {
+             appearance: none; /* ডিফল্ট তারিখ ইনপুট স্টাইলিং সরান */
+            -webkit-appearance: none;
         }
         .age-calculator-content .calculate-button {
             background-color: #007bff; /* নীল বোতাম */
@@ -250,6 +253,39 @@
             color: #d9534f; /* ত্রুটি বার্তার জন্য লাল */
             font-size: 1rem; /* বর্ধিত ফন্ট সাইজ */
             font-weight: 500;
+        }
+        
+        /* বছর ক্যালকুলেটরের ফলাফলের জন্য স্টাইল */
+        #yearCalcResult {
+            align-items: stretch;
+            text-align: center;
+            padding: 10px;
+        }
+        #yearCalcResult .result-item {
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #cce7ff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #yearCalcResult .result-item:first-child {
+            margin-bottom: 15px;
+        }
+        #yearCalcResult h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        #yearCalcResult p {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        #yearCalcResult .past-date {
+            color: #c62828; /* লাল */
+        }
+        #yearCalcResult .future-date {
+            color: #28a745; /* সবুজ */
         }
 
         /* তারিখ ও সময় ক্যালকুলেটর স্টাইল */
@@ -675,7 +711,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%; /* পূর্ণ প্রস্থ জুড়ে বিস্তৃত করুন */
-            margin-top: 20px; /* কিছু টপ মার্জিন যোগ করুন */
+            margin-top: 00px; /* কিছু টপ মার্জিন যোগ করুন */
         }
         .font-clear-all-button:hover {
             background-image: linear-gradient(to right, #d32f2f 0%, #c62828 100%);
@@ -691,7 +727,7 @@
 
         .external-converter-link {
             display: block;
-            margin-top: 20px; /* বর্ধিত মার্জিন */
+            margin-top: 50px; /* বর্ধিত মার্জিন */
             padding: 12px 18px; /* বর্ধিত প্যাডিং */
             background-color: #007bff;
             color: white;
@@ -1137,24 +1173,43 @@
         <!-- বয়স ক্যালকুলেটর বিভাগ -->
         <div id="ageCalculatorContent" class="calculator-content">
             <div class="age-calculator-content">
+                <!-- Existing Age Calculator -->
+                <h3 class="text-xl font-bold text-gray-700 mb-4">বয়স গণনা করুন</h3>
                 <div class="input-group">
                     <label for="birthDate">জন্ম তারিখ:</label>
                     <input type="date" id="birthDate" class="rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 </div>
-
                 <div class="input-group">
                     <label for="currentDate">বর্তমান তারিখ:</label>
                     <input type="date" id="currentDate" class="rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 </div>
-
                 <button id="calculateAgeBtn" class="calculate-button rounded-xl">বয়স গণনা করুন</button>
-
                 <div id="ageResultArea" class="result-area">
                     <p id="ageResult" class="text-xl"></p>
                     <p id="ageErrorMessage" class="error-message"></p>
                 </div>
+                
+                <!-- Divider -->
+                <hr class="my-8 border-gray-300">
+
+                <!-- New Year Calculator Feature -->
+                <h3 class="text-xl font-bold text-gray-700 mb-4">বছর ক্যালকুলেটর</h3>
+                <p class="text-gray-600 mb-4">যেকোনো তারিখ থেকে নির্দিষ্ট বছর আগে ও পরের তারিখ খুঁজুন।</p>
+                <div class="input-group">
+                    <label for="yearCalcDateInput">একটি তারিখ নির্বাচন করুন (খালি রাখলে আজকের তারিখ ব্যবহৃত হবে)</label>
+                    <input type="date" id="yearCalcDateInput" class="rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div class="input-group">
+                    <label for="yearCalcYearsInput">বছরের সংখ্যা লিখুন</label>
+                    <input type="number" id="yearCalcYearsInput" value="10" placeholder="যেমন: ১০" class="rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <button id="calculateYearsBtn" class="calculate-button rounded-xl">হিসাব করুন</button>
+                <div id="yearCalcResult" class="result-area">
+                    <!-- Results will be injected here -->
+                </div>
             </div>
         </div>
+
 
         <!-- তারিখ ও সময় ক্যালকুলেটর বিভাগ -->
         <div id="dateCalculatorContent" class="calculator-content">
@@ -1282,7 +1337,7 @@
 
         <!-- ফন্ট কনভার্টার বিভাগ (আনডু/রিডু সহ আপডেট করা হয়েছে) -->
         <div id="converterContent" class="calculator-content">
-		<h1 style="color:green">যেকোনো ভাঙ্গা বিজয় লেখা ইউনিকোড করে আবার বিজয়ে কনভার্ট করলে ঠিক হয়ে যাবে।</h1>
+		<h1 style="color:green">যেকোনো ভাঙ্গা বিজয় লেখা বিজয় টেক্সট বক্সে রেখে ফিক্স করুন বাটনে ক্লিক করলে অথবা ইউনিকোড করে আবার বিজয় করলেও ঠিক হবে।</h1>
             <div class="font-converter-content">
                 <div class="font-converter-sections-wrapper">
                     <!-- বাম টেক্সটএরিয়া -->
@@ -1303,7 +1358,10 @@
                     <div class="font-converter-section">
                         <div class="font-section-header">
                             <h2>বিজয় টেক্সট</h2>
-                            <button class="font-copy-button rounded-lg" onclick="copyToClipboard('textAreaRight')">কপি করুন</button>
+                            <div class="flex gap-2">
+                                <button id="fixAnsiButton" class="font-copy-button rounded-lg" style="background-image: linear-gradient(to right, #60a5fa 0%, #3b82f6 100%);">ফিক্স করুন</button>
+                                <button class="font-copy-button rounded-lg" onclick="copyToClipboard('textAreaRight')">কপি করুন</button>
+                            </div>
                         </div>
                         <textarea id="textAreaRight" placeholder="এখানে বিজয় টেক্সট লিখুন"></textarea>
                         <div class="font-button-group">
@@ -1429,7 +1487,7 @@
             "া": "v",        "ি": "w",        "ী": "x",        "ু": "y",        "ূ": "~",        "ৃ": "„",
 
             // ফলা সেকশন
-            "্র": "ª",        "্য": "¨",        "র্": "©",	"¦": " ্ব",
+            "্র": "ª",        "্য": "¨",        "র্": "©",	
 
             // ওকার ঔকার সেকশন
             "ে": "‡",        "ৈ": "‰",        "ো": "‡v",       "ৌ": "‡Š",       "ৗ": "Š",
@@ -1453,12 +1511,12 @@
             "ল্ক": "é",      "ল্গ": "ê",      "ল্ট": "ë",      "ল্ড": "ì",      "ল্প": "í",      "ল্ব": "j¦",     "ল্ম": "j¥",     "ল্ল": "jø",     "শ্চ": "ð",	 "দ্দ্ব": "Ï¡",
             "শ্ন": "kœ",     "শ্ব": "k¦",     "শ্ম": "k¥",     "শ্ল": "kø",     "ষ্ক": "®‹",     "ষ্ট": "ó",      "ষ্ঠ": "ô",      "ষ্ণ": "ò",      "ষ্প": "®ú",	 "ন্ত্ব": "šÍ¡",
             "ষ্ফ": "õ",      "ষ্ম": "®§",     "স্ক": "¯‹",     "স্খ": "ö",      "স্ট": "÷",      "স্ত": "¯Í",     "স্থ": "¯’",     "স্ন": "mœ",     "স্প": "¯ú",	 "স্রূ": "¯ªƒ",
-            "স্ফ": "ù",      "স্ব": "¯^",     "স্ম": "¯§",     "স্ল": "¯ø",     "হ্ণ": "nè",     "হ্ন": "ý",      "হ্ম": "þ",      "হ্ল": "n¬",     "হু": "û",		
-            "হৃ": "ü",      "গু": "¸",      "শু": "ï",      "ক্ত্র": "³ª",     "ক্ন": "Kè",     "ক্ষ্ণ": "òœ",     "ক্ষ্ম": "²",      "ক্ষ্র": "ÿ«",     "গ্ব": "M&e",
-            "ঘ্ন": "Nœ",     "ঘ্র": "Nª",     "ঙ্গু": "½y",     "জ্জ্ব": "¾¡",   "ত্ত্ব": "Ë¡",     "ত্রু": "Îæ",     "দ্রু": "`ªæ",    "ভ্রু": "åæ",     "শ্রু": "kÖæ",
-            "ম্প": "¤ú",     "্র্য": "ª‍¨",    "র‌্য": "i¨",     "ক্য": "K¨",     "ল্যু": "j¨y",    "ক্লু": "K¬z",    "ত্র্য": "Î¨",     "স্থ্য": "¯’¨",    "দ্য": "`¨",
+            "স্ফ": "ù",      "স্ব": "¯^",     "স্ম": "¯§",     "স্ল": "¯ø",     "হ্ণ": "nè",     "হ্ন": "ý",      "হ্ম": "þ",      "হ্ল": "n¬",     "হু": "û",		"ড়ু": "o–", 
+            "হৃ": "ü",      "গু": "¸",      "শু": "ï",      "ক্ত্র": "³ª",     "ক্ন": "Kè",     "ক্ষ্ণ": "òœ",     "ক্ষ্ম": "²",      "ক্ষ্র": "ÿ«",     "গ্ব": "M&e",	"য়ু": "qy", 
+            "ঘ্ন": "Nœ",     "ঘ্র": "Nª",     "ঙ্গু": "½y",     "জ্জ্ব": "¾¡",   "ত্ত্ব": "Ë¡",     "ত্রু": "Îæ",     "দ্রু": "`ªæ",    "ভ্রু": "åæ",     "শ্রু": "kÖæ",	"য়ূ": "q~",
+            "ম্প": "¤ú",     "্র্য": "ª‍¨",    "র‌্য": "i¨",     "ক্য": "K¨",     "ল্যু": "j¨y",    "ক্লু": "K¬z",    "ত্র্য": "Î¨",     "স্থ্য": "¯’¨",    "দ্য": "`¨", "য়ো": "‡qv",
             "ক্য": "K¨",     "ভ্য": "f¨",     "ল্য": "j¨", 	"দ্যু": "`y¨",     "ম্য": "g¨",     "ন্য": "b¨",     "ণ্য": "Y¨",     "কার্য": "Kvh©",   "র্ষ": "l©",       "র্য": "h©",		
-		"ব্যু": "ey¨",   "ত্ব": "Z¡",	"হ্ব": "nŸ",	"গ্নু": "Mœy",	"র্ু": "z©",       "৳": "$",      "র্ষূ": "l~©",        "র্ষু": "ly©",    "–": "-","৷": "|",
+		"ব্যু": "ey¨",   "ত্ব": "Z¡",	"হ্ব": "nŸ",	"গ্নু": "Mœy",	"র্ু": "z©",       "৳": "$",      "র্ষূ": "l~©",        "র্ষু": "ly©",    "–": "-","৷": "|",	"ড়ূ": "o~",
         };
 
         // বিজয় থেকে ইউনিকোড রূপান্তরের জন্য ম্যাপিং
@@ -1496,7 +1554,7 @@
             "&": "্",
 
             // বিবিধ
-            "|": "।",        "||": "॥",       "Ô": "‘",        "Õ": "’",        "Ò": "“",        "Ó": "”",        " ": " ",        ".": ".",        ",": ",",        "-": "-",
+           	"¯’": "¯’",		"”Q": "”Q",		 "|": "।",        "||": "॥",       "Ô": "‘",        "Õ": "’",        "Ò": "“",        "Ó": "”",        " ": " ",        ".": ".",        ",": ",",        "-": "-",
             "?": "?",        "!": "!",        "'": "'",        "(": "(",        ")": ")",	"iæ": "রু",	"eªæ": "ব্রু", 	"Zz": "তু",	"nŸ": "হ্ব",
 
             // যুক্তবর্ণ সেকশন
@@ -1516,14 +1574,14 @@
             "ü": "হৃ",      "¸": "গু",      "ï": "শু",      "³ª": "ক্ত্র",     "Kè": "ক্ন",     "òœ": "ক্ষ্ণ",     "²": "ক্ষ্ম",      "ÿ«": "ক্ষ্র",     "M&e": "গ্ব",	"Ï¡": "দ্দ্ব",
             "Nœ": "ঘ্ন",     "Nª": "ঘ্র",     "½y": "ঙ্গু",     "¾¡": "জ্জ্ব",   "Ë¡": "ত্ত্ব",     "Îæ": "ত্রু",     "`ªæ": "দ্রু",     "åæ": "ভ্রু",     "kÖæ": "শ্রু",	"šÍ¡": "ন্ত্ব",
             "¤ú": "ম্প",     "ª‍¨": "্র্য",    "i¨": "র‌্য",     "K¨": "ক্য",     "j¨y": "ল্যু",    "K¬z": "ক্লু",    "Î¨": "ত্র্য",     "¯’¨": "স্থ্য",    "`¨": "দ্য",	"gø": "ম্ল",
-            "f¨": "ভ্য",     "j¨": "ল্য",     "g¨": "ম্য",     "b¨": "ন্য",     "Y¨": "ণ্য",     "Kv¨": "ক্যা",      "l©": "র্ষ",	"ÿ": "ক্ষ",		"åƒ": "ভ্রূ",	"¯ªƒ": "স্রূ",
+            "f¨": "ভ্য",     "j¨": "ল্য",     "g¨": "ম্য",     "b¨": "ন্য",     "Y¨": "ণ্য",     "Kv¨": "ক্যা",      	"ÿ": "ক্ষ",		"åƒ": "ভ্রূ",	"¯ªƒ": "স্রূ",
 		"Z¡": "ত্ব",	"Û": "ন্ড",	"š¿": "ন্ত্র",    "z©": "র্ু", 	"y¨": "্যু",      "©…": "র্ৃ",     "z©": "র্ু",   "z©": "র্ু",    "‚©": "র্ূ",  "•ÿ": "ঙ্ক্ষ", "b¦": "ন্ব",	"¯cø": "স্প্ল",
 		"~¨": "্যূ",   "z¨": "্যু",        "‚¨": "্যূ",  	"Kz©¨": "র্্যু",   "K‚©¨": "র্্যূ",  "³": "ক্ত",       "¯‘": "স্তু", 	"¯¿": "স্ত্র", 	"vu": "াঁ", 	"œ": "্ন",	"¼Í": "ঙ্ক্ত",
 		"uv": "াঁ",	 "›Uª": "ন্ট্র",     "n«": "হ্র",	    "š‘": "ন্তু",	    "Z…": "তৃ",	    "K…": "কৃ",	    "P‚": "চূ",	    "f‚": "ভূ",	    "iƒ": "রূ",	  "¦": "্ব",
-		"›U": "ন্ট",	    "«": "্র",	    "…": "ৃ",	    "‚": "ূ", 	     "æ": "ু",      "Ý": "ন্স",      "š^": "ন্ব",    "ly©": "র্ষু",	 "l~©": "র্ষূ", "MÖƒ": "গ্রূ", "cÖƒ": "প্রূ", 
-			"eªƒ": "ব্রূ", "kÖƒ": "শ্রূ",	"_¦": "থ্ব", "˜M": "দ্গ", "˜N": "দ্ঘ", "Ï": "দ্দ", "$": "৳", "K¥": "ক্ম", "òœ": "ক্ষ্ণ", "M&M": "গ্গ", "º": "গ্দ", "˜M": "দ্গ", "O¥": "ঙ্ম", "”T": "চ্ঞ",
+		"›U": "ন্ট",	    "«": "্র",	    "…": "ৃ",	    "‚": "ূ", 	     "æ": "ু",      "Ý": "ন্স",      "š^": "ন্ব",    "MÖƒ": "গ্রূ", "cÖƒ": "প্রূ", 
+			"eªƒ": "ব্রূ", "kÖƒ": "শ্রূ",	"_¦": "থ্ব", "˜M": "দ্গ", "˜N": "দ্ঘ", "Ï": "দ্দ", "$": "৳", "K¥": "ক্ম", "òœ": "ক্ষ্ণ", "M&M": "গ্গ", "º": "গ্দ", "˜M": "দ্গ", "O¥": "ঙ্ম", "”T": "চ্ঞ", 
 "Y&X": "ণ্ঢ", "Y¥": "ণ্ম", "Zø": "ত্ল", "Îƒ": "ত্রূ", "_¦": "থ্ব", "_ø": "থ্ল", "™£": "দ্ভ্র", "`ªƒ": "দ্রূ", "Ú": "ন্ঠ", "šÍ¦": "ন্ত্ব", "š’": "ন্থ", "åƒ": "ভ্রূ", "fø": "ভ্ল", "¤£": "ম্ভ্র", "¤ø": "ম্ল",
-"î": "ল্ফ", "ñ": "শ্ছ", "®Œ": "ষ্ক্র", "¯Œ": "স্ক্র", "¯’": "স্থ", "¯ª~": "স্রূ", "¯ø": "স্ল", "—M": "ড়্গ", "aªƒ": "ধ্রূ", "¯úø": "স্প্ল", "¤úø": "ম্প্ল", "•g": "ঙ্ম", 	"mø": "স্ল", "¯": "্স",
+"î": "ল্ফ", "ñ": "শ্ছ", "®Œ": "ষ্ক্র", "¯Œ": "স্ক্র", "¯’": "স্থ", "¯ª~": "স্রূ", "¯ø": "স্ল", "—M": "ড়্গ", "aªƒ": "ধ্রূ", "¯úø": "স্প্ল", "¤úø": "ম্প্ল", "•g": "ঙ্ম", 	"mø": "স্ল", "¯": "্স",  
 			};
         // ====================================================================
         // ম্যানুয়াল আনসি (বিজয়) রিপ্লেসমেন্ট ম্যাপ
@@ -1533,13 +1591,13 @@
             // নিচেরগুলোর মতো ম্যানুয়ালী বসাতে হবে সিকুয়েন্স, যদি আন্সিতে কোনো ভুল আউটপুট আসে।
             // ভবিষ্যতে আরও রিপ্লেসমেন্ট নিয়ম এখানে যোগ করুন
             "GZ‡": "G‡Z", // "এতে" GZ‡ কে G‡Z দিয়ে প্রতিস্থাপন করা হয়েছে, আন্সিতে ভুল আউটপুট এখানে এভাবে অ্যাড করতে হবে, আন্সি ভুল টু আন্সি সঠিক
-			"‡ga¨": "g‡a¨",      "Ëw": "wË",       "P&P": "”P",      "¨y": "y¨",       "©„": "©…",        "—": "-",        "ów": "wó",
+			"‡ga¨": "g‡a¨",      "Ëw": "wË",       "P&P": "”P",      "¨y": "y¨",       "©„": "©…",        "—": "-",        	"¯’": "¯’",		"”Q": "”Q",
 			"+‡": "+†",        "+‰": "+ˆ",       "vu": "uv",       "xu": "ux",       "Šu": "uŠ",      "`¨y": "`y¨",     "f©w": "wf©",     "³w": "w³",       "_©w": "w_©",
 			"Mœw": "wMœ",       "K¬w": "wK¬",      "¯’w": "w¯’",      "Ô‡": "Ô†",       "Ò‡": "Ò†",      "-‡": "-†",       "(‡": "(†",       "Ô‰": "Ôˆ", // Corrected from "ˆ"
 			"Ò‰": "Òˆ",        "-‰": "-ˆ",       "(‰": "ˆ",       "¶y": "ÿz",       "ww¯’Z": "w¯’wZ",      "cz©": "c©y",     "‡‡": "‡",        "††": "†",	"©z": "z©",
 			"‰‰": "‰",         "ˆˆ": "ˆ",        "yy": "y",        "~~": "~",        "©©": "©",       "„„": "„",        "&&": "&",        "ªª": "ª",        "ŠŠ": "Š",
 			"/‡": "/†",        "/‰": "(ˆ",       "=‡": "=†",       "=‰": "=ˆ",       "[‡": "[†",      "[‰": "[ˆ",      "{‡": "{†",       "{‰": "{ˆ",       " ‡": " †",
-			" ‰": " ˆ",        " Ó": " Ò",      " Õ": " Ô",      "&;": "Ê",        "&|": "\\",      "&~": "E",        "&„": "F",        "&‡": "G",        "&‰": "H",
+			" ‰": " ˆ",         "&;": "Ê",        "&|": "\\",      "&~": "E",        "&„": "F",        "&‡": "G",        "&‰": "H",
 			"&b": "œ",         "&e": "¦",        "&g": "¥",        "&I": "I",        "&I&h": "I¨",    "&I&i": "Iª",     "&j": "ø",        "&Ô": "“",        "&Š": "J",
 			"&v": "Av",        "&w": "B",        "&x": "C",        "&y": "D",        "&Z": "Í",        "(A)i": "(A)i",  "_&_": "Ì",       "_&e": "_¡",       "_&h": "_¨",
 			"_&i": "_ª",        "_ª": "_ª",        "_u_": "Ì",       "`&`": "Ï",       "`&a": "×",       "`&e": "Ø",        "`&f": "™¢",      "`&g": "Ù",        "`&h": "`¨",
@@ -1610,8 +1668,11 @@
 			"Y&e": "Y¦",       "ÿ&g": "²",        "Y&h": "Y¨",       "Y&i": "Yª",       "Y&U": "È",       "Y&V": "É",       "Y&W": "Ð",       "ÿ~": "ÿ‚",         "ÿ„": "ÿ…",
 			"Yª": "Yª",        "ÿè~": "ÿè‚",      "ÿè„": "ÿè…",      "ÿèy": "ÿèz",      "ÿy": "ÿz",       "Z&_": "Ì",       "Z&b": "Zœ",       "Z&e": "Z¡",          "Z&g": "Z¥",
 			"Z&h": "Z¨",       "Z&i": "Î",        "Z&Z": "Ë",       "Z~": "Z‚",        "Z„": "Z…",       "Zª": "Î",        "Zª~": "Îƒ",          "Zªy": "Îæ",           "Zy": "Zz",
-			"|‡": "|†",			",‡": ",†",			".‡": ".†",			"-‡": "-†",			"?‡": "?†",		":‡": ":†",			"=‡": "=†",			"|‰": "|ˆ",	     "K©~": "K‚©",		",‰": ",ˆ",		"f¨~": "f‚¨",	"f©~": "f‚©",
-			".‰": ".ˆ",			"-‰": "-ˆ",			"?‰": "?ˆ",			":‰": ":ˆ",			"=‰": "=ˆ",   "wwK¬": "wK¬w",	"e©…": "e„©",	   "e¨~": "e~¨",      "P©~": "P‚©Ó",    "P©y": "Pz©",     "K©y" :"Kz©", "f©y": "fz©",
+			"|‡": "|†",			",‡": ",†",			".‡": ".†",			"-‡": "-†",			"?‡": "?†",		":‡": ":†",			"=‡": "=†",			"|‰": "|ˆ",	     "K©~": "K‚©",	
+			",‰": ",ˆ",		"f¨~": "f‚¨",				"f©~": "f‚©",			".‰": ".ˆ",		"-‰": "-ˆ",			"?‰": "?ˆ",			":‰": ":ˆ",		"=‰": "=ˆ",   "wwK¬": "wK¬w",
+			"e©…": "e„©",	   "e¨~": "e~¨",    	  "P©~": "P‚©Ó",   		 "P©y": "Pz©",     "K©y" :"Kz©", 			"f©y": "fz©",		 "Ky": "Kz",	"v©": "©v",		"x©": "©x",
+			"Š©": "©Š", 		"¯Õ": "¯’",		"ÓQ": "”Q", 	"ÒQ": "”Q",	"wwó": "wów",	"šÔ": "š‘",	"dÖ": "d«",  "f’": "f‚",	
+
 
         };
 
@@ -1620,9 +1681,13 @@
         // ফরম্যাট: "ভুল স্ট্রিং": "সঠিক স্ট্রিং"
         const manualUnicodeReplacements = {
             // "ভুল ইউনিকোড": "সঠিক ইউনিকোড",
-            // উদাহরণ: "উদাহরণ": "উদাহরণ" 
-			"": "",
+            // উদাহরণ: "উদাহরণ": "উদাহরণ", 
+			
 			"মধে্য": "মধ্যে",
+			"র্নিভূল": "নির্ভূল",
+			"র্নিভুল": "নির্ভুল",
+			"র্বষ": "বর্ষ",
+			"র্ধষ": "ধর্ষ",
         };
         // ====================================================================
 
@@ -1743,15 +1808,17 @@
         }
 
         // ====================================================================
-        // START: CORRECTED FUNCTION
+        // START: UPDATED FUNCTION (বিজয় থেকে ইউনিকোড)
         // ====================================================================
         function convertRightToLeft() {
             const textAreaLeft = document.getElementById('textAreaLeft');
             const textAreaRight = document.getElementById('textAreaRight');
             let bijoyInput = textAreaRight ? textAreaRight.value : '';
 
+            // [ধাপ ০ সরানো হয়েছে কারণ এটি ত্রুটিপূর্ণ এবং নতুন ইউনিকোড-ভিত্তিক যুক্তি দ্বারা প্রতিস্থাপিত হয়েছে]
+
             // --- ধাপ ১: বিজয় থেকে ইউনিকোড ম্যাপিং ---
-            // প্রথমে, বিজয় স্ট্রিংটিকে ইউনিকোড ক্যারেক্টারে ম্যাপ করুন।
+            // এই অংশটি অপরিবর্তিত রয়েছে। এটি একটি "কাঁচা" ইউনিকোড স্ট্রিং তৈরি করে।
             let unicodeOutput = '';
             let i = 0;
             while (i < bijoyInput.length) {
@@ -1776,25 +1843,27 @@
             const unicodeIkar = '\u09BF'; // ি
             const unicodeEkar = '\u09C7'; // ে
             const unicodeOikar = '\u09C8'; // ৈ
-            const unicodeConsonants = '\u0995-\u09B9\u09DC-\u09DF';
-            const unicodeHasanta = '\u09CD';
-            const unicodeRef = '\u09B0' + unicodeHasanta;
+            const unicodeConsonants = '\\u0995-\\u09B9\\u09DC-\\u09DF';
+            const unicodeHasanta = '\\u09CD';
+            const unicodeRef = '\\u09B0' + unicodeHasanta;
 
-            // ধাপ ২.১: রেফ (র্) পুনঃক্রম করুন (আগে সরানো হয়েছে)
-            // এই ধাপটি রেফকে তার যৌক্তিক অবস্থানে (ব্যঞ্জনবর্ণের আগে) নিয়ে আসে।
-            // উদাহরণ: ক + র্ -> র্ + ক
-            const consonantClusterWithoutRef = `(?:[${unicodeConsonants}](?:${unicodeHasanta}[${unicodeConsonants}])*)`;
-            const rephReorderRegex = new RegExp(`(${consonantClusterWithoutRef})(${unicodeRef})`, 'g');
-            unicodeOutput = unicodeOutput.replace(rephReorderRegex, '$2$1');
+            // ধাপ ২.১: রেফ (র্) পুনঃক্রম করুন (উন্নত এবং সমন্বিত যুক্তি)
+            // এই একক ধাপটি সমস্ত রেফ পুনঃক্রম পরিচালনা করে। এটি একটি ব্যঞ্জনবর্ণ ক্লাস্টার (ঐচ্ছিক কার-চিহ্ন সহ) খুঁজে বের করে
+            // যার পরে একটি রেফ থাকে এবং তাদের স্থান পরিবর্তন করে। এটি ব্যবহারকারীর অনুরোধটি সঠিকভাবে সমাধান করে।
+            // উদাহরণ: ক্তা + র্ -> র্ক্তা এবং ক + র্ -> র্ক উভয়ই সঠিকভাবে কাজ করে।
+            const unicodeVowelSigns = '[\\u09BE-\\u09C4\\u09C7-\\u09C8\\u09CB-\\u09CC\\u09D7]'; // সকল কার-চিহ্ন
+            const consonantCluster = `(?:[${unicodeConsonants}](?:${unicodeHasanta}[${unicodeConsonants}])*)`;
+            const fullClusterWithVowel = `(${consonantCluster}(?:${unicodeVowelSigns})?)`;
+            const robustRephReorder = new RegExp(`${fullClusterWithVowel}(${unicodeRef})`, 'g');
+            unicodeOutput = unicodeOutput.replace(robustRephReorder, '$2$1');
 
-            // ধাপ ২.২: প্রি-সিডিং কার-চিহ্ন (ি, ে, ৈ) সঠিক স্থানে আনুন (পরে সরানো হয়েছে)
-            // এই ধাপটি প্রি-ভাওয়েলগুলিকে তাদের যৌক্তিক অবস্থানে (ব্যঞ্জনবর্ণ/ক্লাস্টারের পরে) নিয়ে আসে।
-            // ক্লাস্টার প্যাটার্নটি সঠিকভাবে এমন ক্লাস্টারগুলি পরিচালনা করে যা এখন একটি রেফ দিয়ে শুরু হতে পারে।
+            // ধাপ ২.২: প্রি-সিডিং কার-চিহ্ন (ি, ে, ৈ) সঠিক স্থানে আনুন 
+            // এই ধাপটি এখন রেফ পুনঃক্রমের পরে চলে, যা সঠিক ক্রমানুসারে নিশ্চিত করে।
             const consonantClusterPattern = `(?:${unicodeRef})?(?:[${unicodeConsonants}](?:${unicodeHasanta}[${unicodeConsonants}])*)`;
             const reorderRegex = new RegExp(`([${unicodeIkar}${unicodeEkar}${unicodeOikar}])(${consonantClusterPattern})`, 'g');
             unicodeOutput = unicodeOutput.replace(reorderRegex, '$2$1');
 
-            // ধাপ ২.৩: ও-কার এবং ঔ-কার গঠন করুন (আপনার দেওয়া নিয়ম অনুযায়ী)
+            // ধাপ ২.৩: ও-কার এবং ঔ-কার গঠন করুন
             // এখন যেহেতু 'ে' সঠিক স্থানে আছে (ব্যঞ্জনবর্ণের পরে), আমরা 'ো' এবং 'ৌ' গঠন করতে পারি।
             // ব্যঞ্জনবর্ণ + ে + া -> ব্যঞ্জনবর্ণ + ো
             const unicodeAkar = '\u09BE'; // া
@@ -1821,9 +1890,51 @@
             }
         }
         // ====================================================================
-        // END: CORRECTED FUNCTION
+        // END: UPDATED FUNCTION
         // ====================================================================
 
+        // ====================================================================
+        // START: ANSI TEXT FIX FUNCTION (UPDATED)
+        // ====================================================================
+        function fixAnsiText() {
+            const textAreaRight = document.getElementById('textAreaRight');
+            if (!textAreaRight) return;
+
+            let textToFix = textAreaRight.value;
+
+            // ধাপ ১: ব্যবহারকারীর অনুরোধ অনুযায়ী, বিজয় টেক্সটবক্সে ভুলবশত থাকা ইউনিকোড অক্ষরগুলিকে তাদের আনসি সমতুল্য দিয়ে প্রতিস্থাপন করুন।
+            // এটি unicodeToBijoyMap ব্যবহার করে করা হয়।
+            for (const key of sortedUnicodeKeys) { // sortedUnicodeKeys বিশ্বব্যাপী সংজ্ঞায়িত এবং দৈর্ঘ্য অনুসারে সাজানো
+                if (key.length > 0 && textToFix.includes(key)) {
+                    // সমস্ত ocorrances প্রতিস্থাপন করতে একটি RegExp ব্যবহার করুন
+                    const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                    textToFix = textToFix.replace(regex, unicodeToBijoyMap[key]);
+                }
+            }
+
+            // ধাপ ২: ম্যানুয়াল আনসি রিপ্লেসমেন্ট ম্যাপ প্রয়োগ করুন (বিদ্যমান যুক্তি)
+            // এটি সাধারণ আনসি-টু-আনসি ভুলগুলি সংশোধন করে।
+            for (const [wrong, correct] of Object.entries(manualAnsiReplacements)) {
+                if (wrong) { // খালি কী এড়িয়ে চলুন
+                    const regex = new RegExp(wrong.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                    textToFix = textToFix.replace(regex, correct);
+                }
+            }
+            
+            // ধাপ ৩: বিশেষ কেস হ্যান্ডলিং (বিদ্যমান যুক্তি)
+            // শব্দের শুরুতে বা বাক্যের শুরুতে ‡ থাকলে † হবে
+            textToFix = textToFix.replace(/(^|\s|\|)‡/gm, '$1†');
+            // শব্দের শুরুতে বা বাক্যের শুরুতে ‰ থাকলে ˆ হবে
+            textToFix = textToFix.replace(/(^|\s|\|)‰/gm, '$1ˆ');
+
+
+            textAreaRight.value = textToFix;
+            addState('textAreaRight'); // আনডু/রিডু এর জন্য স্টেট যোগ করুন
+            showCustomAlert('লেখা ফিক্স করা হয়েছে!'); // ব্যবহারকারীকে জানান
+        }
+        // ====================================================================
+        // END: ANSI TEXT FIX FUNCTION
+        // ====================================================================
 
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
@@ -2000,7 +2111,7 @@
                 console.log('apiKeyModal:', apiKeyModal);
 
                 // প্রাথমিক ট্যাব প্রদর্শন
-                showTab('basic'); // লোডে মৌলিক ক্যালকুলেটরকে সক্রিয় হিসাবে সেট করুন
+                showTab('converter'); // লোডে মৌলিক ক্যালকুলেটরকে সক্রিয় হিসাবে সেট করুন
 
                 // API কী বোতামের স্টাইল আপডেট করার ফাংশন
                 function updateApiKeyButton() {
@@ -2418,6 +2529,69 @@
                     }
 
                     if (ageResult) ageResult.innerText = `আপনার বয়স: ${years} বছর, ${months} মাস, ${days} দিন।`;
+                }
+ // --- বছর ক্যালকুলেটর লজিক ---
+                const yearCalcDateInput = document.getElementById('yearCalcDateInput');
+                const yearCalcYearsInput = document.getElementById('yearCalcYearsInput');
+                const calculateYearsBtn = document.getElementById('calculateYearsBtn');
+                const yearCalcResult = document.getElementById('yearCalcResult');
+
+                if (calculateYearsBtn) {
+                    calculateYearsBtn.addEventListener('click', () => {
+                        console.log('বছর ক্যালকুলেটর বোতামে ক্লিক করা হয়েছে।');
+                        calculateAndDisplayYears();
+                    });
+                }
+
+                function calculateAndDisplayYears() {
+                    const startDateValue = yearCalcDateInput.value;
+                    const yearsToCalc = parseInt(yearCalcYearsInput.value, 10);
+
+                    // আগের ফলাফল মুছে ফেলুন
+                    yearCalcResult.innerHTML = '';
+
+                    if (isNaN(yearsToCalc) || yearsToCalc <= 0) {
+                        yearCalcResult.innerHTML = '<p class="error-message">অনুগ্রহ করে বছরের একটি সঠিক সংখ্যা লিখুন।</p>';
+                        return;
+                    }
+
+                    // যদি কোনো তারিখ নির্বাচন করা না থাকে, তাহলে আজকের তারিখ ব্যবহার করুন
+                    const startDate = startDateValue ? new Date(startDateValue) : new Date();
+                    
+                    // তারিখ অবৈধ হলে ত্রুটি দেখান
+                    if (isNaN(startDate.getTime())) {
+                        yearCalcResult.innerHTML = '<p class="error-message">অনুগ্রহ করে একটি সঠিক তারিখ নির্বাচন করুন।</p>';
+                        return;
+                    }
+
+
+                    // ভবিষ্যতের তারিখ গণনা
+                    const futureDate = new Date(startDate);
+                    futureDate.setFullYear(startDate.getFullYear() + yearsToCalc);
+
+                    // অতীতের তারিখ গণনা
+                    const pastDate = new Date(startDate);
+                    pastDate.setFullYear(startDate.getFullYear() - yearsToCalc);
+
+                    // ফলাফল প্রদর্শনের জন্য তারিখ ফরম্যাট করুন
+                    const dateFormatter = new Intl.DateTimeFormat('bn-BD', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        weekday: 'long'
+                    });
+
+                    // ফলাফল প্রদর্শনের জন্য HTML তৈরি করুন
+                    yearCalcResult.innerHTML = `
+                        <div class="result-item">
+                            <h3>${yearsToCalc} বছর আগে ছিল:</h3>
+                            <p class="past-date">${dateFormatter.format(pastDate)}</p>
+                        </div>
+                        <div class="result-item">
+                            <h3>${yearsToCalc} বছর পরে হবে:</h3>
+                            <p class="future-date">${dateFormatter.format(futureDate)}</p>
+                        </div>
+                    `;
                 }
 
                 // --- তারিখ ও সময় ক্যালকুলেটর লজিক ---
@@ -2987,6 +3161,12 @@ async function handleAskGemini() {
         if(askGeminiBtn) askGeminiBtn.disabled = false;
     }
 }
+
+   // --- ফন্ট কনভার্টার লিসেনার যোগ করুন ---
+                const fixAnsiButton = document.getElementById('fixAnsiButton');
+                if (fixAnsiButton) {
+                    fixAnsiButton.addEventListener('click', fixAnsiText);
+                }
 
  // *** সংশোধিত: প্রাথমিক বার্তাটি এখানে যোগ করা হয়েছে ***
                 if(chatWindow) {
