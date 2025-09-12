@@ -2815,6 +2815,162 @@ input:checked + .slider:before {
     color: #90cdf4;
 }
 
+
+/* --- ক্লিপবোর্ড ম্যানেজার স্টাইল শুরু --- */
+.clipboard-container {
+    font-family: 'Bornomala', sans-serif;
+}
+
+#clipboard-items-container {
+    min-height: 200px;
+}
+
+.clipboard-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: background-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden; /* হোভার ইফেক্টের জন্য */
+}
+
+.dark .clipboard-item {
+    background-color: #2c3e50;
+    border-color: #34495e;
+}
+
+.clipboard-item.pinned {
+    background-color: #fffbeb;
+    border-left: 4px solid #f59e0b; /* হলুদ বর্ডার */
+}
+
+.dark .clipboard-item.pinned {
+    background-color: #3a372a;
+    border-left-color: #fcd34d;
+}
+
+.clipboard-item.dragging {
+    opacity: 0.5;
+    background: #cce7ff;
+}
+.dark .clipboard-item.dragging {
+    background: #34495e;
+}
+
+.clipboard-item .serial {
+    font-weight: bold;
+    color: #4a5568;
+    background-color: #e2e8f0;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.dark .clipboard-item .serial {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.clipboard-item .content {
+    flex-grow: 1;
+    min-width: 0;
+    cursor: text;
+}
+
+.clipboard-item .content-text {
+    color: #212529;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 120px;
+    overflow-y: auto;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.dark .clipboard-item .content-text {
+    color: #f8f9fa;
+}
+
+.clipboard-item .content-text:focus {
+    outline: 1px solid #3b82f6;
+    background-color: #ffffff;
+}
+.dark .clipboard-item .content-text:focus {
+    background-color: #1f2937;
+}
+
+
+.clipboard-item .content-image {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 6px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.clipboard-item .actions {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) translateX(120%); /* প্রাথমিকভাবে লুকানো */
+    transition: transform 0.2s ease-in-out;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.dark .clipboard-item .actions {
+     background: rgba(45, 55, 72, 0.8);
+}
+
+
+.clipboard-item:hover .actions {
+    transform: translateY(-50%) translateX(0); /* হোভারে দৃশ্যমান */
+}
+
+.clipboard-item .action-btn {
+    border: none;
+    background: #e9ecef;
+    color: #495057;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dark .clipboard-item .action-btn {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.clipboard-item .action-btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.clipboard-item .action-btn.pin.active {
+    background-color: #f59e0b;
+    color: white;
+}
+/* --- ক্লিপবোর্ড ম্যানেজার স্টাইল শেষ --- */
+
 /* নতুন: নোটপ্যাড / টু-ডু লিস্ট স্টাইল (আপডেট করা) */
 .notepad-container {
     padding: 20px;
@@ -2855,7 +3011,7 @@ input:checked + .slider:before {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color: 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 .add-task-btn:hover {
     background-color: #218838;
@@ -2866,93 +3022,151 @@ input:checked + .slider:before {
     max-height: 400px;
     overflow-y: auto;
 }
+
+/* টাস্ক আইটেম এবং এর বিভিন্ন অবস্থার স্টাইল */
 .task-item {
     display: flex;
-    align-items: center; /* উল্লম্বভাবে মাঝখানে রাখার জন্য */
-    gap: 10px; /* আইটেমগুলোর মধ্যে ফাঁক */
+    align-items: center;
+    gap: 10px;
     padding: 12px;
     background-color: #ffffff;
     border-radius: 8px;
     margin-bottom: 10px;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     word-break: break-word;
+    position: relative;
+    overflow: hidden;
+    padding-right: 120px;
 }
 .dark .task-item {
     background-color: #1a202c;
     border-color: #4a5568;
 }
-.task-item.completed .task-text { /* Selector updated */
+.task-item.pinned {
+    background-color: #fef3c7; /* হালকা হলুদ */
+    border-left: 4px solid #f59e0b; /* হলুদ বর্ডার */
+}
+.dark .task-item.pinned {
+    background-color: #3f331a;
+    border-left-color: #fcd34d;
+}
+.task-item.completed .task-text {
     text-decoration: line-through;
     color: #6c757d;
 }
-.dark .task-item.completed .task-text { /* Dark mode selector updated */
+.dark .task-item.completed .task-text {
     color: #a0aec0;
 }
-.task-item .task-text { /* New class for text span */
-    flex-grow: 1;
-    text-align: justify; /* Justify can look weird for short text */
-    cursor: pointer;
+.task-item.dragging {
+    opacity: 0.5;
+    background-color: #cce7ff;
 }
-.dark .task-item .task-text {
-    color: #f4f4f4; /* এটি একটি হালকা ধূসর রং যা কালো ব্যাকগ্রাউন্ডে ভালোভাবে দেখা যাবে */
-}
-.delete-task-btn {
-    background-color: #ef5350;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: auto; /* ডিলিট বাটন ডানদিকে ঠেলে দেওয়ার জন্য */
-    flex-shrink: 0;
-    line-height: 1;
-    transition: background-color 0.2s ease;
-}
-.delete-task-btn:hover {
-    background-color: #d32f2f;
+.dark .task-item.dragging {
+    background-color: #2c3748;
 }
 
-/* নতুন: টাস্ক আইটেমের নাম্বারিং স্টাইল (আপডেট করা) */
+/* টাস্ক টেক্সট এবং নাম্বারিং স্টাইল */
+.task-item .task-text {
+    flex-grow: 1;
+    text-align: justify;
+    cursor: pointer;
+    white-space: pre-wrap; /* নতুন: এন্টার কী/লাইন ব্রেক সমর্থন করার জন্য যোগ করা হয়েছে */
+}
+.dark .task-item .task-text {
+    color: #f4f4f4;
+}
+.task-item .task-text:focus {
+    outline: 2px solid #3b82f6;
+    background-color: #ffffff;
+    padding: 2px 4px;
+    margin: -3px -5px;
+    border-radius: 4px;
+}
+.dark .task-item .task-text:focus {
+    background-color: #2c3748;
+}
 .task-number {
     font-weight: bold;
     color: #3f51b5;
     background-color: #e0e7ff;
     border-radius: 50%;
-    width: 24px;       /* সাইজ কমানো হয়েছে */
-    height: 24px;      /* সাইজ কমানো হয়েছে */
-    font-size: 0.85rem;  /* ফন্ট সাইজ কমানো হয়েছে */
+    width: 24px;
+    height: 24px;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
     flex-shrink: 0;
 }
-
 .dark .task-number {
     color: #90cdf4;
     background-color: #4a5568;
 }
 
-/* নতুন: ড্র্যাগ করার সময় টাস্ক আইটেমের স্টাইল */
-.task-item.dragging {
-    opacity: 0.5;
-    background-color: #cce7ff;
+/* টাস্ক আইটেমের অ্যাকশন বাটন স্টাইল */
+.task-item .actions {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) translateX(125%);
+    transition: transform 0.2s ease-in-out;
+    background: rgba(241, 245, 249, 0.9);
+    padding: 5px;
+    border-radius: 20px;
+    z-index: 2;
+}
+.dark .task-item .actions {
+    background: rgba(45, 55, 72, 0.9);
+}
+.task-item:hover .actions {
+    transform: translateY(-50%) translateX(0);
+}
+.task-item .action-btn {
+    border: none;
+    background: #e2e8f0;
+    color: #475569;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+.dark .task-item .action-btn {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+.task-item .action-btn:hover {
+    transform: scale(1.1);
+}
+.task-item .action-btn.copy:hover {
+    background-color: #3b82f6;
+    color: white;
+}
+.task-item .action-btn.delete:hover {
+    background-color: #ef4444;
+    color: white;
+}
+.task-item .action-btn.pin:hover {
+    background-color: #f59e0b;
+    color: white;
+}
+.task-item .action-btn.pin.active {
+    background-color: #f59e0b;
+    color: white;
 }
 
-.dark .task-item.dragging {
-    background-color: #2c3748;
+/* আগের ডিলিট বাটন স্টাইল অপ্রয়োজনীয়, তাই লুকানো হলো */
+.delete-task-btn {
+    display: none;
 }
-
-
- /* প্রিসেট ড্রপডাউন বাটনের জন্য নতুন CSS */
-    #presetButtonLeft.open svg, #presetButtonRight.open svg {
-        transform: rotate(180deg);
-    }
-
-
 <!-- এখান থেকে ওপরে নতুন ট্যাবের সি এস এস কোড লিখতে হবে -->
     </style>
 </head>
@@ -3018,6 +3232,7 @@ input:checked + .slider:before {
     <button id="weatherTab" class="tab-button rounded-xl">আবহাওয়া</button>
 	<button id="mapTab" class="tab-button rounded-xl">গুগল ম্যাপ</button>
 	<button id="notepadTab" class="tab-button rounded-xl">নোটপ্যাড</button>
+	<button id="clipboardTab" class="tab-button rounded-xl">ক্লিপবোর্ড ম্যানেজার</button>
     
     <!-- নতুন: আরও মেনু (ড্রপডাউন) -->
     <div class="relative">
@@ -4070,6 +4285,19 @@ input:checked + .slider:before {
         <ul id="taskList" class="task-list">
             <!-- কাজগুলো এখানে জাভাস্ক্রিপ্ট দ্বারা যুক্ত হবে -->
         </ul>
+    </div>
+</div>
+
+<!-- নতুন: ক্লিপবোর্ড ম্যানেজার বিভাগ -->
+<div id="clipboardContent" class="calculator-content">
+    <div class="clipboard-container p-4 bg-gray-50 dark:bg-gray-800 rounded-lg max-w-4xl mx-auto">
+        <h3 class="text-xl font-bold text-gray-700 mb-2 dark:text-gray-200">ক্লিপবোর্ড ম্যানেজার</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+            এই ট্যাবে আসলে বা উইন্ডোতে ক্লিক করলে ক্লিপবোর্ডের বর্তমান ডেটা স্বয়ংক্রিয়ভাবে এখানে যুক্ত হবে। আইটেমগুলো ড্র্যাগ করে সাজাতে পারবেন।
+        </p>
+        <div id="clipboard-items-container" class="space-y-3 max-h-[60vh] overflow-y-auto p-2 bg-white dark:bg-gray-700 rounded-md">
+            <!-- ক্লিপবোর্ডের আইটেমগুলো এখানে জাভাস্ক্রিপ্ট দ্বারা যুক্ত হবে -->
+        </div>
     </div>
 </div>
 
@@ -6408,14 +6636,14 @@ function showTab(tabId) {
     // সমস্ত ট্যাব বোতাম এবং কন্টেন্ট বিভাগ নির্বাচন করুন, এই দুটি সেকশনে নতুন ট্যাবের নাম এবং কনটেন্ট নাম যুক্ত করতে হয়।
     const tabs = [
         basicCalcTab, ageCalcTab, dateCalcTab, scientificCalcTab, newsTab,
-        converterTab, measurementTab, typingTestTab, translatorTab, mapTab, prayerTimeTab, imageToTextTab, wordCounterTab, weatherTab, notepadTab,
+        converterTab, measurementTab, typingTestTab, translatorTab, mapTab, prayerTimeTab, imageToTextTab, wordCounterTab, weatherTab, notepadTab,clipboardTab,
         spellCheckTab, textBeautifierTab, wordMeaningTab, ttsTab, sttTab, 
         textAssistantTab, allFeaturesTab
     ];
     const contents = [
         basicCalculatorContent, ageCalculatorContent, dateCalculatorContent,
         scientificCalculatorContent, newsContent, converterContent,
-        measurementContent, typingTestContent, translatorContent, mapContent,  prayerTimeContent, imageToTextContent, wordCounterContent, weatherContent, notepadContent,
+        measurementContent, typingTestContent, translatorContent, mapContent,  prayerTimeContent, imageToTextContent, wordCounterContent, weatherContent, notepadContent,clipboardContent,
         spellCheckerContent, textBeautifierContent, wordMeaningContent, 
         textToSpeechContent, speechToTextContent, textAssistantContent,
         allFeaturesContent
@@ -6497,6 +6725,10 @@ function showTab(tabId) {
 			activeTab = notepadTab;
 			activeContent = notepadContent;
 		break;
+		case 'clipboard':
+			activeTab = clipboardTab;
+			activeContent = clipboardContent;
+		break;
         case 'spellCheck':
             activeTab = spellCheckTab;
             activeContent = spellCheckerContent;
@@ -6557,6 +6789,7 @@ function showTab(tabId) {
 					showTab('notepad');
 					await initializeNotepad(); // Notepad চালু করার জন্য এই ফাংশন কল করুন
 					});
+				if (clipboardTab) clipboardTab.addEventListener('click', () => showTab('clipboard'));
                 if (textAssistantTab) textAssistantTab.addEventListener('click', () => showTab('textAssistant'));
                 if (allFeaturesTab) allFeaturesTab.addEventListener('click', () => showTab('allFeatures'));
 
@@ -8587,113 +8820,145 @@ if (wordCounterContent && wordCounterContent.classList.contains('active')) {
 
 
 // ====================================================================
-// START: NOTEPAD / TO-DO LIST SCRIPT (UPDATED WITH INDEXEDDB)
+// START: NOTEPAD / TO-DO LIST SCRIPT (UPDATED WITH ALL NEW FEATURES)
 // ====================================================================
-async function initializeNotepad() { // ফাংশনটিকে async করা হয়েছে
+async function initializeNotepad() {
     const taskInput = document.getElementById('taskInput');
     const addTaskBtn = document.getElementById('addTaskBtn');
     const taskList = document.getElementById('taskList');
 
     if (!taskInput || !addTaskBtn || !taskList) return;
 
-    // IndexedDB থেকে কাজগুলো লোড করুন
-    await loadTasks(); // async loadTasks ফাংশনের জন্য অপেক্ষা করুন
+    await loadTasks();
 
-    // কাজ যোগ বা আপডেট করার ফাংশন
-    async function addTask() { // ফাংশনটিকে async করা হয়েছে
+    async function addTask() {
         const text = taskInput.value.trim();
         if (text === '') {
             showCustomAlert('অনুগ্রহ করে একটি কাজ বা নোট লিখুন।');
             return;
         }
-
-        if (addTaskBtn.textContent === 'আপডেট করুন') {
-            createTaskElement(text);
-            addTaskBtn.textContent = 'যোগ করুন';
-        } else {
-            createTaskElement(text);
-        }
-
+        createTaskElement(text, false, false); // নতুন কাজ সবসময় আনপিনড থাকবে
         taskInput.value = '';
-        await saveTasks(); // async saveTasks ফাংশনের জন্য অপেক্ষা করুন
-        updateTaskNumbers();
+        await saveTasks();
+        await loadTasks(); // পিন করা আইটেমগুলো ওপরে রাখার জন্য তালিকা পুনরায় লোড করুন
     }
-    
-    async function loadTasks() { // ফাংশনটিকে async করা হয়েছে
-        const tasks = await idbGet('notepadTasks') || []; // localStorage এর পরিবর্তে idbGet ব্যবহার করা হয়েছে
+
+    async function loadTasks() {
+        let tasks = await idbGet('notepadTasks') || [];
+        // কাজগুলো সাজান: প্রথমে পিন করা, তারপর বাকিগুলো
+        tasks.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
         taskList.innerHTML = '';
-        tasks.forEach(task => createTaskElement(task.text, task.completed));
+        tasks.forEach(task => createTaskElement(task.text, task.completed, task.pinned));
         updateTaskNumbers();
     }
 
-    async function saveTasks() { // ফাংশনটিকে async করা হয়েছে
+async function saveTasks() {
         const tasks = [];
         document.querySelectorAll('.task-item').forEach(item => {
             const taskTextSpan = item.querySelector('.task-text');
             if (taskTextSpan) {
-                 tasks.push({
-                    text: taskTextSpan.textContent,
-                    completed: item.classList.contains('completed')
+                tasks.push({
+                    text: taskTextSpan.innerText, // পরিবর্তন: textContent এর পরিবর্তে innerText ব্যবহার করা হয়েছে
+                    completed: item.classList.contains('completed'),
+                    pinned: item.classList.contains('pinned')
                 });
             }
         });
-        await idbSet('notepadTasks', tasks); // localStorage এর পরিবর্তে idbSet ব্যবহার করা হয়েছে
+        await idbSet('notepadTasks', tasks);
     }
 
-    function createTaskElement(text, isCompleted = false) {
+    function createTaskElement(text, isCompleted = false, isPinned = false) {
         const li = document.createElement('li');
         li.className = 'task-item';
         li.setAttribute('draggable', 'true');
-        if (isCompleted) {
-            li.classList.add('completed');
-        }
+        if (isCompleted) li.classList.add('completed');
+        if (isPinned) li.classList.add('pinned');
 
         const numberSpan = document.createElement('span');
         numberSpan.className = 'task-number';
 
         const textSpan = document.createElement('span');
         textSpan.className = 'task-text';
-        textSpan.textContent = text;
-        
-        // সিঙ্গেল ক্লিকে কাজ সম্পন্ন/অসম্পন্ন টগল করুন
-        textSpan.addEventListener('click', async () => { // listener-কে async করা হয়েছে
+        textSpan.innerText = text; // পরিবর্তন: textContent এর পরিবর্তে innerText
+
+        textSpan.addEventListener('click', async () => {
+            if (textSpan.isContentEditable) return; // এডিট মোডে থাকলে কাজ করবে না
             li.classList.toggle('completed');
             await saveTasks();
         });
 
-        // ডাবল ক্লিকে এডিটের জন্য হ্যান্ডেল করুন
         textSpan.addEventListener('dblclick', () => {
-            if (addTaskBtn.textContent === 'আপডেট করুন') {
-                showCustomAlert('অনুগ্রহ করে বর্তমান সম্পাদনা শেষ করুন।');
-                return;
-            }
-            taskInput.value = textSpan.textContent;
-            addTaskBtn.textContent = 'আপডেট করুন';
-            taskList.removeChild(li);
-            updateTaskNumbers();
-            taskInput.focus();
+            textSpan.contentEditable = true;
+            textSpan.focus();
+            const originalText = textSpan.innerText; // পরিবর্তন: textContent এর পরিবর্তে innerText
+
+            const saveOnBlur = async () => {
+                textSpan.contentEditable = false;
+                if (textSpan.innerText.trim() === '') {
+                    textSpan.innerText = originalText; // খালি রাখলে আগের লেখা ফেরত আসবে
+                }
+                if (textSpan.innerText !== originalText) {
+                    await saveTasks();
+                }
+            };
+
+            textSpan.addEventListener('blur', saveOnBlur, { once: true });
+
+            textSpan.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    textSpan.blur();
+                } else if (e.key === 'Escape') {
+                    textSpan.innerText = originalText; // পরিবর্তন: textContent এর পরিবর্তে innerText
+                    textSpan.blur();
+                }
+            });
+        });
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'actions';
+
+        const pinBtn = document.createElement('button');
+        pinBtn.className = 'action-btn pin';
+        if (isPinned) pinBtn.classList.add('active');
+        pinBtn.title = 'পিন/আনপিন করুন';
+        pinBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.176a6 6 0 0 1 .751-.555l.078-.048V2.147a3.2 3.2 0 0 1-.354-.298C3.842 1.674 3.5 1.18 3.5.5a.5.5 0 0 1 .646-.354m.354 1.354a.5.5 0 0 0-.708 0l-.5.5A.5.5 0 0 0 3 2.5V3h10V2.5a.5.5 0 0 0-.293-.45l-.5-.5a.5.5 0 0 0-.707 0l-.001.002-.002.001-.002.001a.5.5 0 0 1-.17.036H5.02a.5.5 0 0 1-.17-.036l-.002-.001-.002-.001L4.5 1.5z"/></svg>`;
+        pinBtn.addEventListener('click', async () => {
+            li.classList.toggle('pinned'); // DOM-এ পিন অবস্থা পরিবর্তন করুন
+            await saveTasks(); // নতুন অবস্থা সেভ করুন
+            await loadTasks(); // তালিকা পুনরায় লোড এবং সাজান
+        });
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'action-btn copy';
+        copyBtn.title = 'কপি করুন';
+        copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>`;
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(textSpan.innerText).then(() => { // পরিবর্তন: textContent এর পরিবর্তে innerText
+                showCustomAlert('নোট কপি করা হয়েছে!');
+            });
         });
 
         const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'delete-task-btn';
-        deleteBtn.innerHTML = '×';
-        deleteBtn.addEventListener('click', async () => { // listener-কে async করা হয়েছে
-            if (addTaskBtn.textContent === 'আপডেট করুন' && taskInput.value === textSpan.textContent) {
-                 taskInput.value = '';
-                 addTaskBtn.textContent = 'যোগ করুন';
-            }
+        deleteBtn.className = 'action-btn delete';
+        deleteBtn.title = 'মুছে ফেলুন';
+        deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>`;
+        deleteBtn.addEventListener('click', async () => {
             li.remove();
             await saveTasks();
             updateTaskNumbers();
         });
 
+        actionsDiv.appendChild(pinBtn);
+        actionsDiv.appendChild(copyBtn);
+        actionsDiv.appendChild(deleteBtn);
+
         li.appendChild(numberSpan);
         li.appendChild(textSpan);
-        li.appendChild(deleteBtn);
+        li.appendChild(actionsDiv);
         taskList.appendChild(li);
     }
 
-    // Event Listeners
     addTaskBtn.addEventListener('click', addTask);
     taskInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
@@ -8702,14 +8967,13 @@ async function initializeNotepad() { // ফাংশনটিকে async কর
         }
     });
 
-    // Drag-and-drop event listeners
     taskList.addEventListener('dragstart', e => {
         if (e.target.classList.contains('task-item')) {
             e.target.classList.add('dragging');
         }
     });
 
-    taskList.addEventListener('dragend', async e => { // listener-কে async করা হয়েছে
+    taskList.addEventListener('dragend', async e => {
         if (e.target.classList.contains('task-item')) {
             e.target.classList.remove('dragging');
             await saveTasks();
@@ -8756,6 +9020,7 @@ async function initializeNotepad() { // ফাংশনটিকে async কর
 // ====================================================================
 // END: NOTEPAD / TO-DO LIST SCRIPT
 // ====================================================================
+
 
 
 //নতুন কোনো ট্যাব যুক্ত করলে তার স্ক্রিপ্ট এটির আগে অ্যাড করতে হবে।
@@ -9267,6 +9532,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // END: RAPID UNDO/REDO ON HOLD SCRIPT
 // ====================================================================
 
+
+
         window.onload = function() {
             const preloader = document.getElementById('preloader');
             const mainContainer = document.querySelector('.main-container');
@@ -9294,6 +9561,325 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         };
+
+// ====================================================================
+// START: CLIPBOARD MANAGER SCRIPT
+// ====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    const clipboardTab = document.getElementById('clipboardTab');
+    if (clipboardTab) {
+        clipboardTab.addEventListener('click', initializeClipboardManager);
+    }
+    
+    // ক্লিপবোর্ড ম্যানেজার ডেটাবেস সেটআপ
+    const CLIPBOARD_DB_NAME = 'ClipboardManagerDB';
+    const CLIPBOARD_STORE_NAME = 'clipboardItems';
+    const CLIPBOARD_DB_VERSION = 1;
+    let clipboardDb;
+
+    function getClipboardDb() {
+        return new Promise((resolve, reject) => {
+            if (clipboardDb) {
+                return resolve(clipboardDb);
+            }
+            const request = indexedDB.open(CLIPBOARD_DB_NAME, CLIPBOARD_DB_VERSION);
+
+            request.onerror = (event) => reject("IndexedDB error: " + request.error);
+
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains(CLIPBOARD_STORE_NAME)) {
+                    const store = db.createObjectStore(CLIPBOARD_STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                    store.createIndex('timestamp', 'timestamp', { unique: false });
+                }
+            };
+
+            request.onsuccess = (event) => {
+                clipboardDb = event.target.result;
+                resolve(clipboardDb);
+            };
+        });
+    }
+
+    // ডেটাবেস থেকে আইটেম রেন্ডার করার ফাংশন
+    async function renderClipboardItems() {
+        const db = await getClipboardDb();
+        const transaction = db.transaction(CLIPBOARD_STORE_NAME, 'readonly');
+        const store = transaction.objectStore(CLIPBOARD_STORE_NAME);
+        const allItems = await new Promise(resolve => store.getAll().onsuccess = e => resolve(e.target.result));
+        
+        // পিন করা আইটেমগুলো ওপরে এবং বাকিগুলো সময় অনুযায়ী সাজানো হবে
+        allItems.sort((a, b) => {
+            if (a.pinned && !b.pinned) return -1;
+            if (!a.pinned && b.pinned) return 1;
+            return b.timestamp - a.timestamp;
+        });
+
+        const container = document.getElementById('clipboard-items-container');
+        if (!container) return;
+        container.innerHTML = ''; // কন্টেইনার পরিষ্কার করুন
+
+        if (allItems.length === 0) {
+            container.innerHTML = `<p class="text-center text-gray-400 dark:text-gray-500 p-8">এখনও কোনো আইটেম নেই। কিছু কপি করুন এবং এই ট্যাবে ফিরে আসুন।</p>`;
+            return;
+        }
+
+        allItems.forEach((item, index) => {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'clipboard-item';
+            itemEl.dataset.id = item.id;
+            itemEl.setAttribute('draggable', 'true');
+            if (item.pinned) {
+                itemEl.classList.add('pinned');
+            }
+
+            let contentHtml;
+            if (item.type === 'text') {
+                contentHtml = `<div class="content"><p class="content-text" spellcheck="false">${escapeHtml(item.content)}</p></div>`;
+            } else if (item.type === 'image') {
+                contentHtml = `<div class="content"><img src="${item.content}" class="content-image" alt="Clipboard Image"></div>`;
+            }
+
+            itemEl.innerHTML = `
+                <span class="serial">${index + 1}</span>
+                ${contentHtml}
+                <div class="actions">
+                    <button class="action-btn pin ${item.pinned ? 'active' : ''}" title="পিন করুন">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.176a6 6 0 0 1 .751-.555l.078-.048V2.147a3.2 3.2 0 0 1-.354-.298C3.842 1.674 3.5 1.18 3.5.5a.5.5 0 0 1 .646-.354m.354 1.354a.5.5 0 0 0-.708 0l-.5.5A.5.5 0 0 0 3 2.5V3h10V2.5a.5.5 0 0 0-.293-.45l-.5-.5a.5.5 0 0 0-.707 0l-.001.002-.002.001-.002.001a.5.5 0 0 1-.17.036H5.02a.5.5 0 0 1-.17-.036l-.002-.001-.002-.001L4.5 1.5z"/></svg>
+                    </button>
+                    <button class="action-btn copy" title="কপি করুন">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>
+                    </button>
+                    <button class="action-btn delete" title="মুছে ফেলুন">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
+                    </button>
+                </div>
+            `;
+            container.appendChild(itemEl);
+        });
+    }
+
+    // ক্লিপবোর্ড থেকে ডেটা সিনক্রোনাইজ করার ফাংশন
+    async function syncFromClipboard() {
+        try {
+            const permission = await navigator.permissions.query({ name: "clipboard-read", allowWithoutGesture: true });
+            if (permission.state === "denied") {
+                console.log("ক্লিপবোর্ড পড়ার অনুমতি দেওয়া হয়নি।");
+                return;
+            }
+
+            const clipboardItems = await navigator.clipboard.read();
+            for (const clipboardItem of clipboardItems) {
+                let newItem = null;
+                const isImage = clipboardItem.types.some(type => type.startsWith("image/"));
+                
+                if (isImage) {
+                    const imageType = clipboardItem.types.find(type => type.startsWith("image/"));
+                    const blob = await clipboardItem.getType(imageType);
+                    const dataUrl = await new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.readAsDataURL(blob);
+                    });
+                    newItem = { content: dataUrl, type: 'image', pinned: false, timestamp: Date.now() };
+                } else if (clipboardItem.types.includes("text/plain")) {
+                    const blob = await clipboardItem.getType("text/plain");
+                    const text = await blob.text();
+                    if (text.trim()) {
+                        newItem = { content: text, type: 'text', pinned: false, timestamp: Date.now() };
+                    }
+                }
+
+                if (newItem) {
+                    await saveItemIfNotExists(newItem);
+                }
+            }
+        } catch (err) {
+            console.error('ক্লিপবোর্ড থেকে ডেটা পড়তে ব্যর্থ:', err);
+        }
+    }
+    
+    // আইটেম ডেটাবেসে সেভ করার ফাংশন (যদি আগে থেকে না থাকে)
+    async function saveItemIfNotExists(item) {
+        const db = await getClipboardDb();
+        const transaction = db.transaction(CLIPBOARD_STORE_NAME, 'readonly');
+        const store = transaction.objectStore(CLIPBOARD_STORE_NAME);
+        const allItems = await new Promise(resolve => store.getAll().onsuccess = e => resolve(e.target.result));
+        
+        const exists = allItems.some(existingItem => existingItem.content === item.content);
+        
+        if (!exists) {
+            const writeTransaction = db.transaction(CLIPBOARD_STORE_NAME, 'readwrite');
+            await new Promise(resolve => writeTransaction.objectStore(CLIPBOARD_STORE_NAME).add(item).onsuccess = resolve);
+            await renderClipboardItems();
+        }
+    }
+    
+    // পুরোনো আইটেম মুছে ফেলার ফাংশন
+    async function cleanupOldItems() {
+        const db = await getClipboardDb();
+        const transaction = db.transaction(CLIPBOARD_STORE_NAME, 'readwrite');
+        const store = transaction.objectStore(CLIPBOARD_STORE_NAME);
+        const index = store.index('timestamp');
+        const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
+        
+        const request = index.openCursor(IDBKeyRange.upperBound(oneDayAgo));
+        request.onsuccess = (event) => {
+            const cursor = event.target.result;
+            if (cursor) {
+                if (!cursor.value.pinned) { // শুধুমাত্র আন-পিন করা আইটেম মুছুন
+                    store.delete(cursor.primaryKey);
+                }
+                cursor.continue();
+            }
+        };
+        transaction.oncomplete = renderClipboardItems;
+    }
+
+    // HTML এনটিটি থেকে বাঁচার জন্য হেল্পার ফাংশন
+    function escapeHtml(text) {
+        return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // ক্লিপবোর্ড ম্যানেজারের ইভেন্ট হ্যান্ডলার
+    function setupClipboardEventListeners() {
+        const container = document.getElementById('clipboard-items-container');
+        if (!container) return;
+
+        container.addEventListener('click', async (e) => {
+            const target = e.target.closest('.action-btn');
+            if (!target) return;
+            
+            const itemEl = target.closest('.clipboard-item');
+            const id = parseInt(itemEl.dataset.id, 10);
+            const db = await getClipboardDb();
+            
+            if (target.classList.contains('delete')) {
+                const tx = db.transaction(CLIPBOARD_STORE_NAME, 'readwrite');
+                await new Promise(resolve => tx.objectStore(CLIPBOARD_STORE_NAME).delete(id).onsuccess = resolve);
+                itemEl.remove();
+            } else if (target.classList.contains('pin')) {
+                const tx = db.transaction(CLIPBOARD_STORE_NAME, 'readwrite');
+                const store = tx.objectStore(CLIPBOARD_STORE_NAME);
+                const item = await new Promise(resolve => store.get(id).onsuccess = e => resolve(e.target.result));
+                item.pinned = !item.pinned;
+                await new Promise(resolve => store.put(item).onsuccess = resolve);
+                await renderClipboardItems(); // পিন করা আইটেমকে ওপরে আনার জন্য রি-রেন্ডার করুন
+            } else if (target.classList.contains('copy')) {
+                 const tx = db.transaction(CLIPBOARD_STORE_NAME, 'readonly');
+                 const item = await new Promise(resolve => tx.objectStore(CLIPBOARD_STORE_NAME).get(id).onsuccess = e => resolve(e.target.result));
+                 
+                 if(item.type === 'text') {
+                     navigator.clipboard.writeText(item.content).then(() => showCustomAlert('লেখা কপি করা হয়েছে!'));
+                 } else if (item.type === 'image') {
+                    // Data URL থেকে Blob তৈরি করুন
+                    const res = await fetch(item.content);
+                    const blob = await res.blob();
+                    await navigator.clipboard.write([new ClipboardItem({[blob.type]: blob})]);
+                    showCustomAlert('ছবি কপি করা হয়েছে!');
+                 }
+            }
+        });
+
+        // লেখা এডিট করার জন্য
+        container.addEventListener('dblclick', (e) => {
+            const target = e.target.closest('.content-text');
+            if (target) {
+                target.contentEditable = true;
+                target.focus();
+                
+                const originalText = target.innerText;
+                const saveChanges = async () => {
+                    target.contentEditable = false;
+                    const newText = target.innerText;
+                    if (newText !== originalText) {
+                        const id = parseInt(target.closest('.clipboard-item').dataset.id, 10);
+                        const db = await getClipboardDb();
+                        const tx = db.transaction(CLIPBOARD_STORE_NAME, 'readwrite');
+                        const store = tx.objectStore(CLIPBOARD_STORE_NAME);
+                        const item = await new Promise(resolve => store.get(id).onsuccess = e => resolve(e.target.result));
+                        item.content = newText;
+                        await new Promise(resolve => store.put(item).onsuccess = resolve);
+                        showCustomAlert('পরিবর্তন সেভ করা হয়েছে!');
+                    }
+                };
+
+                target.addEventListener('blur', saveChanges, { once: true });
+                target.addEventListener('keydown', (ev) => {
+                    if (ev.key === 'Enter' && !ev.shiftKey) {
+                        ev.preventDefault();
+                        target.blur();
+                    }
+                });
+            }
+        });
+
+        // Drag and Drop
+        let draggedItem = null;
+        container.addEventListener('dragstart', (e) => {
+            draggedItem = e.target.closest('.clipboard-item');
+        });
+
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const targetItem = e.target.closest('.clipboard-item');
+            if (targetItem && draggedItem && targetItem !== draggedItem) {
+                 const rect = targetItem.getBoundingClientRect();
+                 const isAfter = e.clientY > rect.top + rect.height / 2;
+                 if(isAfter) {
+                     targetItem.parentNode.insertBefore(draggedItem, targetItem.nextSibling);
+                 } else {
+                     targetItem.parentNode.insertBefore(draggedItem, targetItem);
+                 }
+            }
+        });
+
+        container.addEventListener('drop', async (e) => {
+            e.preventDefault();
+            if (!draggedItem) return;
+            
+            const db = await getClipboardDb();
+            const tx = db.transaction(CLIPBOARD_STORE_NAME, 'readwrite');
+            const store = tx.objectStore(CLIPBOARD_STORE_NAME);
+            const allItems = await new Promise(resolve => store.getAll().onsuccess = e => resolve(e.target.result));
+
+            const idOrder = Array.from(container.querySelectorAll('.clipboard-item')).map(el => parseInt(el.dataset.id, 10));
+
+            // নতুন টাইমস্ট্যাম্প দিয়ে আইটেমগুলো পুনরায় সাজানো
+            const now = Date.now();
+            const updatePromises = [];
+            idOrder.forEach((id, index) => {
+                const itemToUpdate = allItems.find(item => item.id === id);
+                if (itemToUpdate) {
+                    itemToUpdate.timestamp = now - index; // ক্রম ঠিক রাখার জন্য টাইমস্ট্যাম্প আপডেট করা হচ্ছে
+                    updatePromises.push(new Promise(resolve => store.put(itemToUpdate).onsuccess = resolve));
+                }
+            });
+
+            await Promise.all(updatePromises);
+            await renderClipboardItems();
+        });
+    }
+
+    // ক্লিপবোর্ড ম্যানেজার চালু করার মূল ফাংশন
+    let isClipboardManagerInitialized = false;
+    async function initializeClipboardManager() {
+        if (isClipboardManagerInitialized) return;
+        
+        await getClipboardDb();
+        await cleanupOldItems();
+        await renderClipboardItems();
+        setupClipboardEventListeners();
+        
+        window.addEventListener('focus', syncFromClipboard);
+        isClipboardManagerInitialized = true;
+    }
+
+});
+// ====================================================================
+// END: CLIPBOARD MANAGER SCRIPT
+// ====================================================================
 
     </script>
 </body>
